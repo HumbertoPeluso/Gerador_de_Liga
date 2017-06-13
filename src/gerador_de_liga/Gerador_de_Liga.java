@@ -6,6 +6,7 @@
 package gerador_de_liga;
 
 import java.text.ParseException;
+import java.util.Scanner;
 
 /**
  *
@@ -18,14 +19,28 @@ public class Gerador_de_Liga {
      * @throws java.text.ParseException
      */
     public static void main(String[] args) throws ParseException {
-        // TODO code application logic here
-        String caminho = "times.txt";
-        ArquivoTexto arquivo = new ArquivoTexto();
-        arquivo.Ler(caminho);
+             //Este bloco captura as entradas pelo teclado do usuário.
+        Scanner entradaArquivoTexto = new Scanner(System.in);
+        Scanner entradaJogosDeIdaEVolta = new Scanner(System.in);
+        System.out.print("Digite o caminho do arquivo com os times: ");
+        String caminho =entradaArquivoTexto.next();
+        System.out.print("Confronto de jogos de ida e volta? s/n: ");
+        String idaEVolta = entradaJogosDeIdaEVolta.next();
+        System.out.println();
         
+        //Aqui é inciado o objeto arquivo onde será lido o arquivo txt e os dados necessários capturados.
+        ArquivoTexto arquivo = new ArquivoTexto();
+        arquivo.ler(caminho);
+        
+        //Só será gerado os confrontos se houver pelo menos três times no grupo
         if(arquivo.obtemListaDeTimes().size()>2){
             Grupo grupo = new Grupo(arquivo.obtemListaDeTimes());
-          System.out.println(grupo.geraConfronto());
+            System.out.println(grupo.geraConfronto());
+            
+            System.out.println("-----------------------------------------------");
+            //Verifica se será necessário gerar os confrontos do segundo turno
+            if(idaEVolta.equals("s"))
+            System.out.print(grupo.geraconfrontoSegundoTurno());
         }
         else{
             System.out.println("Não há times suficientes");

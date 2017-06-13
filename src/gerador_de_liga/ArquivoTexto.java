@@ -19,10 +19,10 @@ import java.util.ArrayList;
 public class ArquivoTexto {
     
     private ArrayList<Time> times = new ArrayList();
-    public void Ler(String Caminho) throws ParseException{
+    public void ler(String caminho) throws ParseException{
       
         try {
-            FileReader arq = new FileReader(Caminho);
+            FileReader arq = new FileReader(caminho);
             BufferedReader lerArq = new BufferedReader(arq);
             String linha="";
             
@@ -33,8 +33,7 @@ public class ArquivoTexto {
                     // Loop onde se captura os dados do arquivo texto e instancia as classes em seus respectivos objetos
                     String time = linha;
                     if(!ehRepetido(time))
-                        times.add(new Time(time));
-                   
+                        times.add(new Time(time));                 
                     
                     linha = lerArq.readLine();
                 }
